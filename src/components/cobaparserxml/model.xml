@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <element>
+      <key>name</key>
+      <label>Name</label>
+      <props>
+         <required>true</required>
+      </props>
+   </element>
+   <element>
+      <key>birthdate</key>
+      <label>birthdate</label>
+      <type>date</type>      
+   </element>
+   <element>
+      <key>birthplace</key>
+      <label>birthplace</label>      
+   </element>
+    <element>
+      <key>mother_name</key>
+      <label>mother name</label>      
+   </element>
+    <element>
+      <key>nim</key>
+      <label>nim</label>
+      <type>number</type>      
+   </element>
+   
+   
+</root>
