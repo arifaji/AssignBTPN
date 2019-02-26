@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="navbar navbar-dark bg-dark mb-5">
       <div className="container">
         <a className="navbar-brand" href="/">
-          Angular & Bootstrap
+          ReactJS & Bootstrap
         </a>
         <div className="navbar-expand mr-auto">
           <div className="navbar-nav">
@@ -28,17 +28,12 @@ const Navbar = () => {
         </div>
         <div className="navbar-expand ml-auto navbar-nav">
           <div className="navbar-nav">
-            <a
-              className="nav-item nav-link"
-              href="https://github.com/medasaki"
-              target="_blank"
-            >
+            <a className="nav-item nav-link" href="https://github.com/medasaki">
               <i className="fa fa-github" />
             </a>
             <a
               className="nav-item nav-link"
               href="https://twitter.com/medasaki"
-              target="_blank"
             >
               <i className="fa fa-twitter" />
             </a>

@@ -28,33 +28,25 @@ class MyPdfViewer extends Component {
   renderPagination = (page, pages) => {
     let previousButton = (
       <button className="btn btn-sm btn-primary" onClick={this.handlePrevious}>
-        <a>
-          <i className="fa fa-arrow-left" /> Previous
-        </a>
+        <i className="fa fa-arrow-left" /> Previous
       </button>
     );
     if (page === 1) {
       previousButton = (
         <button className="btn btn-sm btn-primary disabled" disabled>
-          <a>
-            <i className="fa fa-arrow-left" /> Previous
-          </a>
+          <i className="fa fa-arrow-left" /> Previous
         </button>
       );
     }
     let nextButton = (
       <button className="btn btn-sm btn-primary" onClick={this.handleNext}>
-        <a>
-          Next <i className="fa fa-arrow-right" />
-        </a>
+        Next <i className="fa fa-arrow-right" />
       </button>
     );
     if (page === pages) {
       nextButton = (
         <button className="btn btn-sm btn-primary disabled" disabled>
-          <a>
-            Next <i className="fa fa-arrow-right" />
-          </a>
+          Next <i className="fa fa-arrow-right" />
         </button>
       );
     }
@@ -76,10 +68,10 @@ class MyPdfViewer extends Component {
     }
     return (
       <div>
-        <div className="container">
+        {/* <div className="container">
           <label htmlFor="file">Load from file:</label>{" "}
           <input type="file" onChange={this.onFileChange} />
-        </div>
+        </div> */}
         {pagination}
         <PDF
           // file="https://core.ac.uk/download/pdf/11724998.pdf"

@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.min.css";
-import CobaParser from "./components/cobaparserxml/CobaParser";
-import App2 from "./App2";
+import App from "./App";
+// import App from "./components/puredynamicindianform/Parent";
+// import App from "./components/app/App";
+
+// import App2 from "./components/formvalidation/Formies";
+// import App3 from "./components/checkboxradio/Checkboxradio";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

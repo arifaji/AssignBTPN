@@ -7,7 +7,9 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Post from "./components/Post";
 import MyPdfViever from "./components/MyPdfViewer";
-import ParentForm from "./components/dynamicform/ParentForm";
+// import ParentForm from "./components/dynamicform/ParentForm";
+// import ParentForm from "./components/olddynamicform/ParentForm";
+import ParentForm from "./components/puredynamicindianform/Parent";
 
 class App extends Component {
   render() {

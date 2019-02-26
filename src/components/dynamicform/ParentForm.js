@@ -18,7 +18,37 @@ class ParentForm extends Component {
         type: "number",
         props: { min: 0, max: 5 }
       },
-      { key: "qualification", label: "Qualification" }
+      {
+        key: "gender",
+        label: "Gender",
+        type: "radio",
+        options: [
+          { key: "male", label: "Male", name: "gender", value: "male" },
+          { key: "female", label: "Female", name: "gender", value: "female" }
+        ]
+      },
+      { key: "qualification", label: "Qualification" },
+      {
+        key: "city",
+        label: "City",
+        type: "select",
+        value: "Kerala",
+        options: [
+          { key: "mumbai", label: "Mumbai", value: "Mumbai" },
+          { key: "bangalore", label: "Bangalore", value: "Bangalore" },
+          { key: "kerala", label: "Kerala", value: "Kerala" }
+        ]
+      },
+      {
+        key: "skills",
+        label: "Skills",
+        type: "checkbox",
+        options: [
+          { key: "reactjs", label: "ReactJS", value: "reactjs" },
+          { key: "angular", label: "Angular", value: "angular" },
+          { key: "vuejs", label: "VueJS", value: "vuejs" }
+        ]
+      }
     ],
     isixml: "",
     parsexml: ""
@@ -30,6 +60,7 @@ class ParentForm extends Component {
 
   getXML = async () => {
     var xml2js = require("xml2js");
+    var url = "http://10.10.18.199:3000/?tableName=form";
 
     await fetch(fileXml)
       .then(response => response.text())
@@ -46,24 +77,24 @@ class ParentForm extends Component {
 
     var xml = this.state.isixml;
 
-    // console.log(this.state.isixml);
+    console.log(this.state.isixml);
 
     var extractedData;
     var parser = new xml2js.Parser();
     parser.parseString(xml, function(err, result) {
       //Extract the value from the data element
-
-      extractedData = result["root"]["element"];
+      console.log(result);
+      extractedData = result["elements"]["element"];
       console.log(extractedData);
     });
     // console.log(extractedData);
     this.setState({ parsexml: extractedData });
-    // console.log(this.state.parsexml);
+    console.log(this.state.parsexml);
     console.log(this.state.modele);
   };
 
   onSubmit2 = model => {
-    model.id = +new Date();
+    // model.id = +new Date();
     alert(JSON.stringify(model));
     this.setState({
       data: [model, ...this.state.data]
@@ -71,7 +102,7 @@ class ParentForm extends Component {
   };
 
   onSubmit = model => {
-    var url = "http://10.10.18.199:3000/?tableName=user";
+    var url = "http://10.10.18.199:3000/?tableName=customer";
     // alert(JSON.stringify(model));
 
     fetch(url, {
@@ -84,8 +115,8 @@ class ParentForm extends Component {
       .then(res => res.json())
       .then(response => {
         console.log("Status:", JSON.stringify(response));
-        if (response.status == "200") {
-          alert("Success");
+        if (response.message == "Success") {
+          alert(response.message);
         } else {
           alert("Failed");
         }
@@ -102,12 +133,10 @@ class ParentForm extends Component {
           title="Registration"
           model={xmlmodel}
           // model={this.state.modele}
-          // model={this.state.modele}
           onSubmit={model => {
             this.onSubmit2(model);
           }}
         />
-        <pre>{JSON.stringify(this.state.data)}</pre>
       </React.Fragment>
     );
   }

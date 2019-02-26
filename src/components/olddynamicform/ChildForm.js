@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import "./Style.css";
-import NumberFormat from "react-number-format";
 
 class DynamicForm extends Component {
   state = {};
@@ -46,20 +44,17 @@ class DynamicForm extends Component {
     let defaultValues = this.props.defaultValues;
 
     let formUI = model.map(m => {
-      let key = m.keyfield;
+      let key = m.key;
       let type = m.type || "text";
       let props = m.props || {};
       let name = m.name;
       let value = m.value;
-      let required = m.required;
-      let options = m.options;
 
       let target = key;
       value = this.state[target];
 
       let input = (
         <input
-          required={required}
           {...props}
           className="form-input"
           type={type}
@@ -71,25 +66,6 @@ class DynamicForm extends Component {
           }}
         />
       );
-
-      if (type == "number") {
-        input = (
-          <NumberFormat
-            required={required}
-            {...props}
-            className="form-input"
-            isNumericString={true}
-            allowNegative={false}
-            decimalSeparator={false}
-            key={key}
-            name={name}
-            value={value}
-            onChange={e => {
-              this.onChange(e, target);
-            }}
-          />
-        );
-      }
 
       if (type == "radio") {
         input = m.options.map(o => {
@@ -116,11 +92,8 @@ class DynamicForm extends Component {
       }
 
       if (type == "select") {
-        let requireds;
-        if (m.required + [] === "true" || m.required === true) {
-          requireds = true;
-        }
-        input = options.map(o => {
+        input = m.options.map(o => {
+          let checked = o.value == value;
           console.log("select: ", o.value, value);
           return (
             <option
@@ -129,28 +102,23 @@ class DynamicForm extends Component {
               key={o.key}
               value={o.value}
             >
-              {o.label}
+              {o.value}
             </option>
           );
         });
 
-        // console.log("Select default: ", value);
+        console.log("Select default: ", value);
         input = (
           <select
-            defaultValue=""
-            required={requireds}
+            value={value}
             onChange={e => {
               this.onChange(e, m.key);
             }}
           >
-            <option value="" disabled>
-              {"-= Select " + m.label + " =-"}
-            </option>
             {input}
           </select>
         );
       }
-      //End If
 
       if (type == "checkbox") {
         input = m.options.map(o => {
@@ -183,19 +151,12 @@ class DynamicForm extends Component {
       }
 
       return (
-        <React.Fragment>
-          {/* <div key={"g" + key} className="form-group"> */}
-          <label
-            key={"g" + key}
-            className="form-label"
-            key={"l" + key}
-            htmlFor={key}
-          >
-            <b>{m.label}</b>
+        <div key={"g" + key} className="form-group">
+          <label className="form-label" key={"l" + key} htmlFor={key}>
+            {m.label}
           </label>
           {input}
-          {/* </div> */}
-        </React.Fragment>
+        </div>
       );
     });
     return formUI;
@@ -205,25 +166,20 @@ class DynamicForm extends Component {
     let title = this.props.title || "Dynamic Form";
 
     return (
-      <React.Fragment>
-        {/* <div className={this.props.className} > */}
-        <div className="container">
-          <h1>{title}</h1>
-          <form
-            className="dynamic-form"
-            onSubmit={e => {
-              this.onSubmit(e);
-            }}
-          >
-            {this.renderForm()}
-            <div className="form-group">
-              <button type="submit" className="registerbtn">
-                Submit!
-              </button>
-            </div>
-          </form>
-        </div>
-      </React.Fragment>
+      <div className={this.props.className}>
+        <h3>{title}</h3>
+        <form
+          className="dynamic-form"
+          onSubmit={e => {
+            this.onSubmit(e);
+          }}
+        >
+          {this.renderForm()}
+          <div className="form-group">
+            <button type="submit">Submit!</button>
+          </div>
+        </form>
+      </div>
     );
   }
 }
